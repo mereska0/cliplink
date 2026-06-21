@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package link;
+
+option go_package = "github.com/mereska0/cliplink/api/gen/linkpb;linkpb";
+
+service LinkService {
+  rpc CreateLink(CreateLinkRequest) returns (CreateLinkResponse);
+  rpc ListLinks(ListLinksRequest) returns (ListLinksResponse);
+  rpc DeleteLink(DeleteLinkRequest) returns (DeleteLinkResponse);
+  rpc GetLink(GetLinkRequest) returns (GetLinkResponse);
+}
+
+message Link {
+  int64 id = 1;
+  string short_code = 2;
+  string original_url = 3;
+  int64 clicks = 4;
+  string created_at = 5;
+}
+
+message CreateLinkRequest {
+  string original_url = 1;
+  string custom_alias = 2;
+}
+
+message CreateLinkResponse {
+  Link link = 1;
+}
+
+message ListLinksRequest {}
+
+message ListLinksResponse {
+  repeated Link links = 1;
+}
+
+message DeleteLinkRequest {
+  string short_code = 1;
+}
+
+message DeleteLinkResponse {}
+
+message GetLinkRequest {
+  string short_code = 1;
+}
+
+message GetLinkResponse {
+  Link link = 1;
+}
